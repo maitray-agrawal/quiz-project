@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Platform</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; background-color: #fff; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding: 30px; }
+        h1 { color: #333; }
+        .quiz-list { list-style: none; padding: 0; }
+        .quiz-list li { margin-bottom: 15px; }
+        .quiz-list a {
+            display: block;
+            padding: 20px;
+            background-color: #007BFF;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            transition: background-color 0.3s;
+        }
+        .quiz-list a:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Quiz Platform!</h1>
+        <p>Please select a quiz to start:</p>
+        <ul class="quiz-list">
+            <!-- Jinja loop: Iterate over the 'quizzes' list passed from app.py -->
+            {% for quiz in quizzes %}
+                <li>
+                    <!-- Create a link to the quiz route, passing the quiz.id -->
+                    <a href="{{ url_for('quiz', quiz_id=quiz.id) }}">{{ quiz.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

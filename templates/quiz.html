@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ quiz.title }}</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; background-color: #fff; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); padding: 30px; }
+        h1 { color: #333; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        .question-block { margin-bottom: 25px; }
+        .question-text { font-size: 1.3em; font-weight: bold; color: #555; margin-bottom: 15px; }
+        .options-list { list-style: none; padding-left: 10px; }
+        .options-list li { margin-bottom: 10px; font-size: 1.1em; }
+        .options-list label { margin-left: 10px; cursor: pointer; }
+        input[type="radio"] { transform: scale(1.2); }
+        .submit-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #28a745;
+            color: #fff;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .submit-btn:hover { background-color: #218838; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ quiz.title }}</h1>
+        
+        <!-- The form will POST the data to our /submit/<quiz_id> route -->
+        <form action="{{ url_for('submit', quiz_id=quiz.id) }}" method="POST">
+            
+            <!-- Loop through each question in the quiz -->
+            {% for question in quiz.questions %}
+                <div class="question-block">
+                    <p class="question-text">{{ loop.index }}. {{ question.text }}</p>
+                    <ul class="options-list">
+                        <!-- Loop through each option for the current question -->
+                        {% for option in question.options %}
+                            <li>
+                                <!-- 
+                                  The radio button 'name' groups options for one question.
+                                  The 'value' is the option.id, which we use to check the answer.
+                                -->
+                                <input type="radio" name="question_{{ question.id }}" id="option_{{ option.id }}" value="{{ option.id }}" required>
+                                <label for="option_{{ option.id }}">{{ option.text }}</label>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+            
+            <button type="submit" class="submit-btn">Submit Answers</button>
+        </form>
+    </div>
+</body>
+</html>
