@@ -21,6 +21,7 @@ else:
     # Fallback to local sqlite database
     basedir = os.path.abspath(os.path.dirname(__file__))
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'quiz.db')
+    
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Initialize the database
@@ -90,17 +91,81 @@ def init_db_command():
         o2_3 = Option(text="A type of loop", is_correct=False, question=q2)
         db.session.add_all([o2_1, o2_2, o2_3])
 
+        # Q3
+        q3 = Question(text="What keyword is used to define a function in Python?", quiz=py_quiz)
+        db.session.add(q3)
+        o3_1 = Option(text="func", is_correct=False, question=q3)
+        o3_2 = Option(text="def", is_correct=True, question=q3)
+        o3_3 = Option(text="function", is_correct=False, question=q3)
+        db.session.add_all([o3_1, o3_2, o3_3])
+
+        # Q4
+        q4 = Question(text="How do you create a single-line comment in Python?", quiz=py_quiz)
+        db.session.add(q4)
+        o4_1 = Option(text="// This is a comment", is_correct=False, question=q4)
+        o4_2 = Option(text="/* This is a comment */", is_correct=False, question=q4)
+        o4_3 = Option(text="# This is a comment", is_correct=True, question=q4)
+        db.session.add_all([o4_1, o4_2, o4_3])
+
+        # Q5
+        q5 = Question(text="What is the correct way to create a dictionary?", quiz=py_quiz)
+        db.session.add(q5)
+        o5_1 = Option(text='my_dict = {"name": "John", "age": 30}', is_correct=True, question=q5)
+        o5_2 = Option(text='my_dict = ["name", "John", "age", 30]', is_correct=False, question=q5)
+        o5_3 = Option(text='my_dict = ("name": "John", "age": 30)', is_correct=False, question=q5)
+        db.session.add_all([o5_1, o5_2, o5_3])
+
+        # Q6
+        q6 = Question(text="Which data type is immutable in Python?", quiz=py_quiz)
+        db.session.add(q6)
+        o6_1 = Option(text="list", is_correct=False, question=q6)
+        o6_2 = Option(text="dict", is_correct=False, question=q6)
+        o6_3 = Option(text="tuple", is_correct=True, question=q6)
+        db.session.add_all([o6_1, o6_2, o6_3])
+
+        # Q7
+        q7 = Question(text="What does the len() function do?", quiz=py_quiz)
+        db.session.add(q7)
+        o7_1 = Option(text="Returns the length of an object", is_correct=True, question=q7)
+        o7_2 = Option(text="Converts an object to a string", is_correct=False, question=q7)
+        o7_3 = Option(text="Creates a new list", is_correct=False, question=q7)
+        db.session.add_all([o7_1, o7_2, o7_3])
+
+        # Q8
+        q8 = Question(text="How do you check the data type of a variable 'x'?", quiz=py_quiz)
+        db.session.add(q8)
+        o8_1 = Option(text="type(x)", is_correct=True, question=q8)
+        o8_2 = Option(text="datatype(x)", is_correct=False, question=q8)
+        o8_3 = Option(text="x.type()", is_correct=False, question=q8)
+        db.session.add_all([o8_1, o8_2, o8_3])
+
+        # Q9
+        q9 = Question(text="What operator is used for exponentiation (2 to the power of 3)?", quiz=py_quiz)
+        db.session.add(q9)
+        o9_1 = Option(text="^", is_correct=False, question=q9)
+        o9_2 = Option(text="**", is_correct=True, question=q9)
+        o9_3 = Option(text="pow", is_correct=False, question=q9)
+        db.session.add_all([o9_1, o9_2, o9_3])
+
+        # Q10
+        q10 = Question(text="How do you start a 'for' loop to iterate over a list called 'my_list'?", quiz=py_quiz)
+        db.session.add(q10)
+        o10_1 = Option(text="for item in my_list:", is_correct=True, question=q10)
+        o10_2 = Option(text="loop item in my_list:", is_correct=False, question=q10)
+        o10_3 = Option(text="for my_list:", is_correct=False, question=q10)
+        db.session.add_all([o10_1, o10_2, o10_3])
+
         # Create an "Entertainment" quiz
         ent_quiz = Quiz(title="Movie Trivia")
         db.session.add(ent_quiz)
 
         # Q1
-        q3 = Question(text="What movie is this quote from: 'I'll be back'?", quiz=ent_quiz)
-        db.session.add(q3)
-        o3_1 = Option(text="Titanic", is_correct=False, question=q3)
-        o3_2 = Option(text="The Terminator", is_correct=True, question=q3)
-        o3_3 = Option(text="The Matrix", is_correct=False, question=q3)
-        db.session.add_all([o3_1, o3_2, o3_3])
+        q11 = Question(text="What movie is this quote from: 'I'll be back'?", quiz=ent_quiz)
+        db.session.add(q11)
+        o11_1 = Option(text="Titanic", is_correct=False, question=q11)
+        o11_2 = Option(text="The Terminator", is_correct=True, question=q11)
+        o11_3 = Option(text="The Matrix", is_correct=False, question=q11)
+        db.session.add_all([o11_1, o11_2, o11_3])
 
         # Commit all changes to the database
         db.session.commit()
