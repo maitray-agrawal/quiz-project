@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: my-quiz-platform  # <-- Change this to your service name on Render
+    runtime: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "gunicorn app:app --preload"
+    preDeployCommand: "flask init-db"  # <-- This will run and update your database
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: quiz-db      # <-- Change this to your database name on Render
+          property: internalConnectionString
