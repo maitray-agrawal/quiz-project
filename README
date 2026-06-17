@@ -1,0 +1,24 @@
+# EduLens – AI Student Analytics Platform
+
+EduLens is a full-stack AI-powered dashboard that helps educators identify at-risk students using machine learning and AI explanations.
+
+## Features
+- Student data management API
+- ML-based risk prediction
+- AI assistant for insights (LLM)
+- Interactive dashboard (React)
+
+## Tech Stack
+- FastAPI, MongoDB, Scikit-learn
+- React (Vite)
+- Groq LLM
+
+## Live Demo
+Frontend: <your-link>
+Backend: <your-link>
+
+## Screenshots
+(Add images)
+
+## Author
+Maitray Agrawal
